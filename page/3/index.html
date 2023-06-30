@@ -4,17 +4,13 @@
   <meta charset="utf-8">
   
   
-  <title>ciscn-web | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="unzip dumpit访问  123&gt;?db&#x3D;ctf&amp;table_2_dump&#x3D;flag1%0Aenv?db&#x3D;ctf&amp;table_2_dump&#x3D;flag%0Aenv:?db&#x3D;ctf&amp;table_2_dump&#x3D;flag1%0Aenv&gt;?db&#x3D;ctf&amp;table_2_dump&#x3D;flag1%0Aenv   Backend Service“小明拿到了内网一个老">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ciscn-web">
-<meta property="og:url" content="http://example.com/2023/06/01/ciscn-web/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="unzip dumpit访问  123&gt;?db&#x3D;ctf&amp;table_2_dump&#x3D;flag1%0Aenv?db&#x3D;ctf&amp;table_2_dump&#x3D;flag%0Aenv:?db&#x3D;ctf&amp;table_2_dump&#x3D;flag1%0Aenv&gt;?db&#x3D;ctf&amp;table_2_dump&#x3D;flag1%0Aenv   Backend Service“小明拿到了内网一个老">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-06-01T01:21:18.000Z">
-<meta property="article:modified_time" content="2023-06-01T11:33:25.325Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,7 +71,223 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-ciscn-web" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main">
+  
+    <article id="post-web1-web28" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/06/01/web1-web28/" class="article-date">
+  <time class="dt-published" datetime="2023-06-01T01:21:18.000Z" itemprop="datePublished">2023-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTFshow/">CTFshow</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/06/01/web1-web28/">Web1 - Web28</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h3><ol>
+<li>查看源代码即可</li>
+</ol>
+<hr>
+<h3 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h3><p>“js前台拦截 &#x3D;&#x3D;&#x3D; 无效操作”</p>
+<ol>
+<li>不能右键查看源代码,ctrl+u查看即可</li>
+</ol>
+<hr>
+<h3 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h3><p>“没思路的时候抓个包看看，可能会有意外收获”</p>
+<ol>
+<li>F12查看发现有flag   <strong>或者</strong>   burp抓包也可以看到flag</li>
+</ol>
+<hr>
+<h3 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h3><p>“总有人把后台地址写入robots，帮黑阔大佬们引路。”</p>
+<ol>
+<li>访问<code>url/robots.txt</code></li>
+<li>按照提示访问<code>url/flagishere.txt</code></li>
+</ol>
+<hr>
+<h3 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h3><p>“phps源码泄露有时候能帮上忙”</p>
+<ol>
+<li>dirsearch扫后台，发现<code>/index.phps</code></li>
+</ol>
+<hr>
+<h3 id="web6"><a href="#web6" class="headerlink" title="web6"></a>web6</h3><p>“解压源码到当前目录，测试正常，收工”</p>
+<ol>
+<li>扫后台，发现<code>www.zip</code></li>
+<li>发现<code>fl00g.txt</code>，打开后提交flag，发现不对</li>
+<li>访问<code>url/fl00g.txt</code></li>
+</ol>
+<hr>
+<h3 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h3><p>“版本控制很重要，但不要部署到生产环境更重要。”</p>
+<ol>
+<li>扫后台，发现<code>url/.git</code>，访问得到flag</li>
+</ol>
+<hr>
+<h3 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h3><p>“版本控制很重要，但不要部署到生产环境更重要。”</p>
+<ol>
+<li>扫后台，发现<code>url/.svn</code>，访问得到flag</li>
+</ol>
+<hr>
+<h3 id="web9"><a href="#web9" class="headerlink" title="web9"></a>web9</h3><p>“发现网页有个错别字？赶紧在生产环境vim改下，不好，死机了”</p>
+<ol>
+<li>考察vim缓存信息泄露，直接访问url&#x2F;index.php.swp</li>
+<li>或者扫描后台</li>
+</ol>
+<hr>
+<h3 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h3><p>“cookie 只是一块饼干，不能存放任何隐私数据”</p>
+<ol>
+<li>F12查看Cookie</li>
+</ol>
+<blockquote>
+   <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag=ctfshow%<span class="number">7</span>Bf9cd290b-<span class="number">5</span>efa-<span class="number">4</span>fc3-<span class="number">858</span>d-<span class="number">72903687</span>c1a3%<span class="number">7</span>D</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol start="2">
+<li>url解码</li>
+</ol>
+<blockquote>
+   <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag=ctfshow&#123;f9cd290b-<span class="number">5</span>efa-<span class="number">4</span>fc3-<span class="number">858</span>d-<span class="number">72903687</span>c1a3&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<h3 id="web11"><a href="#web11" class="headerlink" title="web11"></a>web11</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://zijian.aliyun.com/home%E4%B8%AD%E8%BE%93%E5%85%A5flag.ctfshow.com">https://zijian.aliyun.com/home中输入flag.ctfshow.com</a></li>
+</ol>
+<hr>
+<h3 id="web12"><a href="#web12" class="headerlink" title="web12"></a>web12</h3><ol>
+<li><p>扫描后台，发现<code>robots.txt</code>，访问发现用户名为<code>admin</code></p>
+</li>
+<li><p>拉到页面最下面，发现<code>Help Line Number : 372619038</code></p>
+</li>
+<li><p>用户名:<code>admin</code>，密码:<code>372619038</code></p>
+</li>
+</ol>
+<hr>
+<h3 id="web13"><a href="#web13" class="headerlink" title="web13"></a>web13</h3><ol>
+<li>扫描后台，没发现东西，查看源代码，发现一个<code>document.pdf</code></li>
+<li>访问url&#x2F;document.pdf，发现后台网址、账户和密码，访问得到flag</li>
+</ol>
+<hr>
+<h3 id="web14"><a href="#web14" class="headerlink" title="web14"></a>web14</h3><ol>
+<li>扫描后台，发现<code>url/editor</code></li>
+<li>进去点击插入文件，寻找flag所在文件，发现可疑文件<code>fl00g.txt</code></li>
+<li>直接访问路径<code>url/editor/attached/file/tmp/html/nothinghere/fl000g.txt</code>，发现没有flag</li>
+<li>访问相对路径<code>url/nothinghere/fl00g.txt</code></li>
+</ol>
+<hr>
+<h3 id="web15"><a href="#web15" class="headerlink" title="web15"></a>web15</h3><ol>
+<li>页面找到一个QQ</li>
+<li>(扫后台)访问<code>url/admin</code>，点击忘记密码</li>
+<li>查看QQ居住地发现是西安（为什么我看的是香港），重置密码后登录即可获得flag(用户名为<code>admin</code>)</li>
+</ol>
+<hr>
+<h3 id="web16"><a href="#web16" class="headerlink" title="web16"></a>web16</h3><ol>
+<li><p>根据提示，访问<code>url/tz.php</code></p>
+</li>
+<li><p>PHP相关参数中<code>PHPINFO</code>可跳转，点击<code>PHPINFO</code></p>
+</li>
+<li><p><code>ctrl+f</code>搜索<code>ctfshow</code></p>
+</li>
+</ol>
+<hr>
+<h3 id="web17"><a href="#web17" class="headerlink" title="web17"></a>web17</h3><ol>
+<li>扫后台，发现<code>url/backup.sql</code>，下载打开即可获得flag</li>
+</ol>
+<hr>
+<h3 id="web18"><a href="#web18" class="headerlink" title="web18"></a>web18</h3><ol>
+<li><p>玩游戏是不可能玩的（是谁菜玩不到100分我不说），查看源代码</p>
+</li>
+<li><p>查看源代码，然后查看js源码，发现</p>
+</li>
+</ol>
+<blockquote>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if(score&gt;100)</span><br><span class="line">&#123;</span><br><span class="line">var result=window.confirm(&quot;\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6\u70b9\u76ae\u7231\u5403\u76ae\u770b\u770b&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol start="3">
+<li>unicode转中文</li>
+</ol>
+<blockquote>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\u4f60\u8d62\u4e86\uff0c\u53bb\u5e7a\u5e7a\u96f6\u70b9\u76ae\u7231\u5403\u76ae\u770b\u770b</span><br><span class="line"></span><br><span class="line">你赢了，去幺幺零点皮爱吃皮看看</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol start="4">
+<li>访问<code>url/110.php</code></li>
+</ol>
+<hr>
+<h3 id="web19"><a href="#web19" class="headerlink" title="web19"></a>web19</h3><ol>
+<li>直接查看源代码，发现一个</li>
+</ol>
+<blockquote>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;/script&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    error_reporting(0);</span><br><span class="line">    $flag=&quot;fakeflag&quot;</span><br><span class="line">    $u = $_POST[&#x27;username&#x27;];</span><br><span class="line">    $p = $_POST[&#x27;pazzword&#x27;];</span><br><span class="line">    if(isset($u) &amp;&amp; isset($p))&#123;</span><br><span class="line">        if($u===&#x27;admin&#x27; &amp;&amp; $p ===&#x27;a599ac85a73384ee3219fa684296eaa62667238d608efa81837030bd1ce1bf04&#x27;)&#123;</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    --&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol start="2">
+<li>hackbar执行post提交</li>
+</ol>
+<blockquote>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=admin&amp;pazzword=a599ac85a73384ee3219fa684296eaa62667238d608efa81837030bd1ce1bf04</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<h3 id="web20"><a href="#web20" class="headerlink" title="web20"></a>web20</h3><ol>
+<li>没思路直接看WP</li>
+</ol>
+<blockquote>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdb文件是早期asp+access构架的数据库文件 直接查看url路径添加/db/db.mdb 下载文件通过txt打开或者通过EasyAccess.exe打开搜索flag flag&#123;ctfshow_old_database&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h3><ol>
+<li>首先抓包，发送至Intruder模块，添加字典</li>
+</ol>
+<blockquote>
+<p> <img src="/2023/06/01/web1-web28/image-20221013102104828.png"></p>
+</blockquote>
+<ol start="2">
+<li>由于是用户名和密码进行base64加密</li>
+</ol>
+<blockquote>
+<p> <img src="/2023/06/01/web1-web28/image-20221013102145065.png"></p>
+</blockquote>
+<p>  所以构造payload</p>
+<blockquote>
+<p> <img src="/2023/06/01/web1-web28/image-20221013102228954.png"></p>
+</blockquote>
+<blockquote>
+<p> <img src="/2023/06/01/web1-web28/image-20221013102301089.png"></p>
+</blockquote>
+<blockquote>
+<p> <img src="/2023/06/01/web1-web28/image-20221013102325323.png"></p>
+</blockquote>
+<ol start="3">
+<li>拿到密码，登录即可获得flag</li>
+</ol>
+<blockquote>
+<p> <img src="/2023/06/01/web1-web28/image-20221013102429776.png"></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/06/01/web1-web28/" data-id="clid001yg0000lguzh5szcbe3" data-title="Web1 - Web28" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ciscn-web" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/06/01/ciscn-web/" class="article-date">
   <time class="dt-published" datetime="2023-06-01T01:21:18.000Z" itemprop="datePublished">2023-06-01</time>
@@ -92,8 +304,8 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      ciscn-web
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/06/01/ciscn-web/">ciscn-web</a>
     </h1>
   
 
@@ -150,24 +362,17 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2023/06/01/web1-web28/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Web1 - Web28
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-  
 </article>
 
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         
